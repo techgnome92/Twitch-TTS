@@ -13,4 +13,5 @@ def save_json(data, fp: str) -> None:
 
 
 secrets = load_json("config.json")
-settings = Settings(**load_json("validation.json"))
+settings = Settings(**load_json("settings.json"))
+voices = load_json("voices.json")
