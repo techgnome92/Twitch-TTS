@@ -10,5 +10,6 @@
     "CHANNEL_POINT_ID": "",
     "EVERYONE_ALLOWED": false,
     "SAY_CHEER_EMOTE": false,
-    "SAY_USERNAME": false
+    "SAY_USERNAME": false,
+    "TTS_VOICE": "sam"
 }

@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Request
 from validate import Settings
-from utils import validation, save_json
+from utils import settings, save_json, voices
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 
@@ -11,15 +11,16 @@ app = FastAPI()
 
 @app.post("/update_validation")
 def update_validation(v: Settings):
-    global validation
+    global settings
 
-    validation = v
-    save_json(validation.model_dump(mode="json"), "validation.json")
+    settings = v
+    settings.TTS_VOICE = settings.TTS_VOICE.lower()
+    save_json(settings.model_dump(mode="json"), "settings.json")
 
 
 @app.get("/", response_class=HTMLResponse)
 async def root(request: Request):
-    return templates.TemplateResponse(request, "index.html", context={"validation": validation})
+    return templates.TemplateResponse(request, "index.html", context={"settings": settings, "voices": voices})
 
 if __name__ == "__main__":
     import uvicorn

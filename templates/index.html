@@ -15,7 +15,7 @@
 
 <body>
     <main>
-        <button class="btn btn-primary" onclick="my_modal_1.showModal()">
+        <button class="btn btn-primary" onclick="settings.showModal()">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -23,7 +23,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
             </svg>
         </button>
-        <dialog id="my_modal_1" class="modal">
+        <dialog id="settings" class="modal">
             <div class="modal-box grid grid-cols-2 gap-4">
                 <div class="modal-action contents ">
                     <form method="dialog" class="contents">
@@ -31,58 +31,65 @@
                             hx-ext='json-enc' hx-swap="none">
                             <label class="text-right" for="toggle_broadcaster">Broadcaster</label>
                             <input type="checkbox" id="toggle_broadcaster" name="BROADCASTER_ALLOWED"
-                                class="toggle toggle-primary" {% if validation["BROADCASTER_ALLOWED"] %} checked {%
-                                endif %} />
+                                class="toggle toggle-primary" {% if settings["BROADCASTER_ALLOWED"] %} checked {% endif
+                                %} />
 
                             <label class="text-right" for="toggle_everyone">Everyone</label>
                             <input type="checkbox" id="toggle_everyone" name="EVERYONE_ALLOWED"
-                                class="toggle toggle-primary" {% if validation["EVERYONE_ALLOWED"] %} checked {% endif
+                                class="toggle toggle-primary" {% if settings["EVERYONE_ALLOWED"] %} checked {% endif
                                 %} />
 
                             <label class="text-right" for="toggle_subscribers">Subscribers</label>
                             <input type="checkbox" id="toggle_subscribers" name="SUBSCRIBERS_ALLOWED"
-                                class="toggle toggle-primary" {% if validation["SUBSCRIBERS_ALLOWED"] %} checked {%
-                                endif %} />
+                                class="toggle toggle-primary" {% if settings["SUBSCRIBERS_ALLOWED"] %} checked {% endif
+                                %} />
 
                             <label class="text-right" for="toggle_vip">Vip</label>
                             <input type="checkbox" id="toggle_vip" name="VIP_ALLOWED" class="toggle toggle-primary" {%
-                                if validation["VIP_ALLOWED"] %} checked {% endif %} />
+                                if settings["VIP_ALLOWED"] %} checked {% endif %} />
 
                             <label class="text-right" for="toggle_turbo">Turbo</label>
                             <input type="checkbox" id="toggle_turbo" name="TURBO_ALLOWED" class="toggle toggle-primary"
-                                {% if validation["TURBO_ALLOWED"] %} checked {% endif %} />
+                                {% if settings["TURBO_ALLOWED"] %} checked {% endif %} />
 
                             <label class="text-right" for="toggle_moderator">Moderator</label>
                             <input type="checkbox" id="toggle_moderator" name="MODERATOR_ALLOWED"
-                                class="toggle toggle-primary" {% if validation["MODERATOR_ALLOWED"] %} checked {% endif
+                                class="toggle toggle-primary" {% if settings["MODERATOR_ALLOWED"] %} checked {% endif
                                 %} />
 
                             <label class="text-right" for="toggle_bit_donation">Bit Donations</label>
                             <input type="checkbox" id="toggle_bit_donation" name="BIT_DONATION_ALLOWED"
-                                class="toggle toggle-primary" {% if validation["BIT_DONATION_ALLOWED"] %} checked {%
-                                endif %} />
+                                class="toggle toggle-primary" {% if settings["BIT_DONATION_ALLOWED"] %} checked {% endif
+                                %} />
 
                             <label class="text-right" for="toggle_channel_point">Channel Points</label>
                             <input type="checkbox" id="toggle_channel_point" name="CHANNEL_POINT_ALLOWED"
-                                class="toggle toggle-primary" {% if validation["CHANNEL_POINT_ALLOWED"] %} checked {%
+                                class="toggle toggle-primary" {% if settings["CHANNEL_POINT_ALLOWED"] %} checked {%
                                 endif %} />
 
-                                <label class="text-right" for="toggle_say_cheer">Say Cheer Emote</label>
-                                <input type="checkbox" id="toggle_say_cheer" name="SAY_CHEER_EMOTE"
-                                    class="toggle toggle-primary" {% if validation["SAY_CHEER_EMOTE"] %} checked {%
-                                    endif %} />
-                                    <label class="text-right" for="toggle_say_username">Say Username</label>
-                                    <input type="checkbox" id="toggle_say_username" name="SAY_USERNAME"
-                                        class="toggle toggle-primary" {% if validation["SAY_USERNAME"] %} checked {%
-                                        endif %} />
+                            <label class="text-right" for="toggle_say_cheer">Say Cheer Emote</label>
+                            <input type="checkbox" id="toggle_say_cheer" name="SAY_CHEER_EMOTE"
+                                class="toggle toggle-primary" {% if settings["SAY_CHEER_EMOTE"] %} checked {% endif
+                                %} />
+                            <label class="text-right" for="toggle_say_username">Say Username</label>
+                            <input type="checkbox" id="toggle_say_username" name="SAY_USERNAME"
+                                class="toggle toggle-primary" {% if settings["SAY_USERNAME"] %} checked {% endif %} />
 
                             <label class="text-right" for="bit_amount">Bit Amount</label>
                             <input type="number" id="bit_amount" name="BIT_DONATION_AMOUNT" class="input validator"
-                                min="1" pattern="[0-9]" value='{{validation["BIT_DONATION_AMOUNT"]}}' />
+                                min="1" pattern="[0-9]" value='{{settings["BIT_DONATION_AMOUNT"]}}' />
 
                             <label class="text-right" for="channel_point_id">Channel Point ID</label>
                             <input type="text" id="channel_point_id" name="CHANNEL_POINT_ID" class="input"
-                                value='{{validation["CHANNEL_POINT_ID"]}}' />
+                                value='{{settings["CHANNEL_POINT_ID"]}}' />
+
+                            <label class="text-right" for="voices">Default Voice</label>
+                            <select class="select capitalize" name="TTS_VOICE">
+                                {% for voice in voices.keys()%}
+                                <option {% if settings["TTS_VOICE"]==voice %} selected {% endif %}>{{voice}}</option>
+                                {% endfor %}
+                            </select>
+
 
                             <input id="submit-validation" class="btn btn-primary col-span-2" type="submit"
                                 value="save" />
@@ -91,6 +98,7 @@
                 </div>
             </div>
         </dialog>
+        
     </main>
 
 </body>
