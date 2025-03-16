@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request
 from validate import Settings
-from utils import settings, save_json, voices, allowed_users
-from allowed_user import AllowedUsersList
+from utils import settings, save_json, voices, allowed_users, _allowed_users
+from allowed_user import AllowedUsersList, AllowedUser
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 
@@ -25,11 +25,10 @@ def update_allowed_users(users: AllowedUsersList):
     new_dict: dict = {}
     for i in users.users:
         new_dict[i.username] = i.voice
-
     save_json(new_dict, "users/allowed.json")
 
 
-@app.get("/allowed_user_row/{_id}")
+@app.get("/allowed_user_row")
 def add_allowed_user_row(request: Request, _id: int):
     return templates.TemplateResponse(request, "allowed_user.html", context={"voices": voices, "id": _id})
 
