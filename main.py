@@ -1,8 +1,10 @@
 from fastapi import FastAPI, Request
 from validate import Settings
-from utils import settings, save_json, voices
+from utils import settings, save_json, voices, allowed_users
+from allowed_user import AllowedUsersList
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
+
 
 templates = Jinja2Templates(directory="templates")
 
@@ -18,9 +20,17 @@ def update_validation(v: Settings):
     save_json(settings.model_dump(mode="json"), "settings.json")
 
 
+@app.post("/allowed_users")
+def update_allowed_users(users: AllowedUsersList):
+    print(users)
+
+
 @app.get("/", response_class=HTMLResponse)
 async def root(request: Request):
-    return templates.TemplateResponse(request, "index.html", context={"settings": settings, "voices": voices})
+    return templates.TemplateResponse(
+        request, "index.html", context={"settings": settings, "voices": voices, "allowed_users": allowed_users}
+    )
+
 
 if __name__ == "__main__":
     import uvicorn

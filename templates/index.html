@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/htmx.org@2.0.4"></script>
     <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/json-enc.js"></script>
+    <script src="https://unpkg.com/htmx-ext-form-json"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5.0.2/themes.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -23,6 +24,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
             </svg>
         </button>
+
         <dialog id="settings" class="modal">
             <div class="modal-box grid grid-cols-2 gap-4">
                 <div class="modal-action contents ">
@@ -98,7 +100,34 @@
                 </div>
             </div>
         </dialog>
-        
+
+        <button class="btn btn-primary" onclick="allowedUsers.showModal()">
+            Allowed Users
+        </button>
+        <dialog id="allowedUsers" class="modal">
+            <div class="modal-box grid grid-cols-2 gap-4">
+                <div class="modal-action contents ">
+                    <form method="dialog" class="contents">
+                        <div class="contents" hx-trigger="click from:#submit-allowed-users" hx-post="/allowed_users"
+                            hx-ext="form-json" hx-swap="none">
+                            {% for user in allowed_users %}
+                                <div class="contents">
+                                    <input class="text-center" type="text" name="users[{{loop.index-1}}][username]" value="{{user["username"]}}" placeholder="Allowed User">
+                                    <select class="select capitalize" name="users[{{loop.index-1}}][voice]">
+                                        <option>default</option>
+                                        {% for voice in voices.keys()%}
+                                        <option {% if user["voice"]==voice %} selected {% endif %}>{{voice}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            {% endfor %}
+                            <input id="submit-allowed-users" class="btn btn-primary col-span-2" type="submit"
+                                value="save" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </dialog>
     </main>
 
 </body>
