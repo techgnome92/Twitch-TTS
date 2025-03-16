@@ -1,5 +1,5 @@
 import json
-from validate import Validation
+from validate import Settings
 
 
 def load_json(fp: str):
@@ -12,5 +12,5 @@ def save_json(data, fp: str) -> None:
         json.dump(data, f, indent=4)
 
 
-settings = load_json("config.json")
-validation = Validation(**load_json("validation.json"))
+secrets = load_json("config.json")
+settings = Settings(**load_json("validation.json"))

@@ -1,9 +1,9 @@
 from twitchAPI.object.eventsub import ChannelChatMessageEvent
-from validate import validate_message, Validation
+from validate import validate_message, Settings
 
 
 class Message:
-    settings: Validation = Validation()
+    settings: Settings = Settings()
 
     user_allow_list: list = []
     user_ignore_list: list = []

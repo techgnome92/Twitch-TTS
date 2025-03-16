@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Request
-from validate import Validation
+from validate import Settings
 from utils import validation, save_json
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
@@ -10,7 +10,7 @@ app = FastAPI()
 
 
 @app.post("/update_validation")
-def update_validation(v: Validation):
+def update_validation(v: Settings):
     global validation
 
     validation = v

@@ -2,7 +2,7 @@ from twitchAPI.object.eventsub import ChannelChatMessageEvent
 from pydantic import BaseModel
 
 
-class Validation(BaseModel):
+class Settings(BaseModel):
     BROADCASTER_ALLOWED: bool = False
     SUBSCRIBERS_ALLOWED: bool = False
     VIP_ALLOWED: bool = False
@@ -17,7 +17,7 @@ class Validation(BaseModel):
     SAY_USERNAME: bool = False
 
 
-def validate_message(message: ChannelChatMessageEvent, settings: Validation, users_allowed: list, users_ignored: list):
+def validate_message(message: ChannelChatMessageEvent, settings: Settings, users_allowed: list, users_ignored: list):
     event = message.event
     badges = [badge.set_id for badge in event.badges]
 
