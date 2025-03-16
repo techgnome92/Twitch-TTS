@@ -1,12 +1,5 @@
 {
-    "users": [
-        {
-            "username": "testing",
-            "voice": "sam"
-        },
-        {
-            "username": "testing2",
-            "voice": "mike"
-        }
-    ]
+    "testing": "sam",
+    "testing2": "mike",
+    "sadfds": "zira"
 }

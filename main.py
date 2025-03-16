@@ -22,7 +22,11 @@ def update_validation(v: Settings):
 
 @app.post("/allowed_users")
 def update_allowed_users(users: AllowedUsersList):
-    print(users)
+    new_dict: dict = {}
+    for i in users.users:
+        new_dict[i.username] = i.voice
+
+    save_json(new_dict, "users/allowed.json")
 
 
 @app.get("/allowed_user_row/{_id}")

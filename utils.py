@@ -1,6 +1,6 @@
 import json
 from validate import Settings
-from allowed_user import AllowedUsersList
+from allowed_user import AllowedUser
 
 
 def load_json(fp: str):
@@ -15,5 +15,7 @@ def save_json(data, fp: str) -> None:
 
 secrets = load_json("config.json")
 settings = Settings(**load_json("settings.json"))
-allowed_users = AllowedUsersList(**load_json("users/allowed.json")).users
 voices = load_json("voices.json")
+
+_allowed_users = load_json("users/allowed.json")
+allowed_users = [AllowedUser(username=k, voice=v) for k, v in _allowed_users.items()]
