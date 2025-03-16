@@ -15,6 +15,7 @@ class Settings(BaseModel):
     EVERYONE_ALLOWED: bool = False
     SAY_CHEER_EMOTE: bool = False
     SAY_USERNAME: bool = False
+    TTS_VOICE: str = "ms_sam"
 
 
 def validate_message(message: ChannelChatMessageEvent, settings: Settings, users_allowed: list, users_ignored: list):
