@@ -1,0 +1,9 @@
+<div class="contents">
+    <input class="text-center" type="text" name="users[{{id}}][username]" placeholder="Allowed User">
+    <select class="select capitalize" name="users[{{id}}][voice]">
+        <option>default</option>
+        {% for voice in voices.keys()%}
+        <option>{{voice}}</option>
+        {% endfor %}
+    </select>
+</div>

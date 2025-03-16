@@ -3,6 +3,10 @@
         {
             "username": "testing",
             "voice": "sam"
+        },
+        {
+            "username": "testing2",
+            "voice": "mike"
         }
     ]
 }

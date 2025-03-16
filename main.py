@@ -25,6 +25,11 @@ def update_allowed_users(users: AllowedUsersList):
     print(users)
 
 
+@app.get("/allowed_user_row/{_id}")
+def add_allowed_user_row(request: Request, _id: int):
+    return templates.TemplateResponse(request, "allowed_user.html", context={"voices": voices, "id": _id})
+
+
 @app.get("/", response_class=HTMLResponse)
 async def root(request: Request):
     return templates.TemplateResponse(
