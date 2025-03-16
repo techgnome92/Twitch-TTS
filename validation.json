@@ -1,0 +1,14 @@
+{
+    "BROADCASTER_ALLOWED": false,
+    "SUBSCRIBERS_ALLOWED": false,
+    "VIP_ALLOWED": false,
+    "TURBO_ALLOWED": false,
+    "MODERATOR_ALLOWED": false,
+    "BIT_DONATION_ALLOWED": false,
+    "BIT_DONATION_AMOUNT": 100,
+    "CHANNEL_POINT_ALLOWED": false,
+    "CHANNEL_POINT_ID": "",
+    "EVERYONE_ALLOWED": false,
+    "SAY_CHEER_EMOTE": false,
+    "SAY_USERNAME": false
+}
