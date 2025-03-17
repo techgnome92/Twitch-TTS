@@ -162,9 +162,7 @@
                                 <input class="text-center" type="text" name="users[]"
                                     value="{{user}}" placeholder="Ignored User">
 
-                                <input type="button" class="btn btn-error" value="delete"> 
-                                <!-- hx-delete="/allowed_users/{{user['username']}}" hx-params="none"
-                                    hx-target="closest div" hx-swap="outerHTML"> -->
+                                <input type="button" class="btn btn-error" value="delete" _="on click remove closest parent <div/>">
                             </div>
                             {% endfor %}
                             <input type="button" class="btn btn-primary col-span-2" value="Add Row"
