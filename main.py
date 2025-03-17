@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request
 from validate import Settings
 from utils import settings, save_json, voices, allowed_users, _allowed_users, ignored_users
-from allowed_user import AllowedUsersList, AllowedUser, IgnoreUsersList
+from users_models import AllowedUsersList, IgnoreUsersList
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 

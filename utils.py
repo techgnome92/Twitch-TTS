@@ -1,6 +1,6 @@
 import json
 from validate import Settings
-from allowed_user import AllowedUser
+from users_models import AllowedUser
 
 
 def load_json(fp: str):
