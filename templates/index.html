@@ -160,7 +160,7 @@
                             {% for user in ignored_users %}
                             <div class="contents">
                                 <input class="text-center" type="text" name="users[]"
-                                    value="{{user['username']}}" placeholder="Ignored User">
+                                    value="{{user}}" placeholder="Ignored User">
 
                                 <input type="button" class="btn btn-error" value="delete"> 
                                 <!-- hx-delete="/allowed_users/{{user['username']}}" hx-params="none"
