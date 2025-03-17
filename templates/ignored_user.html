@@ -1,0 +1,28 @@
+<button class="btn btn-primary" onclick="ignoredUsers.showModal()">
+    Ignored Users
+</button>
+<dialog id="ignoredUsers" class="modal">
+    <div class="modal-box grid grid-cols-2 gap-4">
+        <div class="modal-action contents ">
+            <form method="dialog" class="contents">
+                <div class="contents" hx-trigger="click from:#submit-ignored-users" hx-post="/ignored_users"
+                    hx-ext="form-json" hx-swap="none">
+
+                    {% for user in ignored_users %}
+                    <div class="contents">
+                        <input class="text-center" type="text" name="users[]"
+                            value="{{user}}" placeholder="Ignored User">
+
+                        <input type="button" class="btn btn-error" value="delete" _="on click remove closest parent <div/>">
+                    </div>
+                    {% endfor %}
+                    <input type="button" class="btn btn-primary col-span-2" value="Add Row"
+                    hx-get="/ignored_user_row"
+                    hx-swap="beforebegin" />
+                    <input id="submit-ignored-users" class="btn btn-primary col-span-2" type="submit"
+                        value="save" />
+                </div>
+            </form>
+        </div>
+    </div>
+</dialog>
