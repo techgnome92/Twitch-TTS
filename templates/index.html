@@ -19,6 +19,7 @@
 
 <body>
     <main>
+        <!-- SETTINGS -->
         <button class="btn btn-primary" onclick="settings.showModal()">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="size-6">
@@ -104,6 +105,7 @@
             </div>
         </dialog>
 
+        <!-- ALLOWED USERS -->
         <button class="btn btn-primary" onclick="allowedUsers.showModal()">
             Allowed Users
         </button>
@@ -137,6 +139,38 @@
                                 value="{{allowed_users|length}}" />
 
                             <input id="submit-allowed-users" class="btn btn-primary col-span-3" type="submit" hx-params="not ['#countAllowedUsers']"
+                                value="save" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </dialog>
+
+        <!-- IGNORED USERS -->
+        <button class="btn btn-primary" onclick="ignoredUsers.showModal()">
+            Ignored Users
+        </button>
+        <dialog id="ignoredUsers" class="modal">
+            <div class="modal-box grid grid-cols-2 gap-4">
+                <div class="modal-action contents ">
+                    <form method="dialog" class="contents">
+                        <div class="contents" hx-trigger="click from:#submit-ignored-users" hx-post="/ignored_users"
+                            hx-ext="form-json" hx-swap="none">
+
+                            {% for user in ignored_users %}
+                            <div class="contents">
+                                <input class="text-center" type="text" name="users[]"
+                                    value="{{user['username']}}" placeholder="Ignored User">
+
+                                <input type="button" class="btn btn-error" value="delete"> 
+                                <!-- hx-delete="/allowed_users/{{user['username']}}" hx-params="none"
+                                    hx-target="closest div" hx-swap="outerHTML"> -->
+                            </div>
+                            {% endfor %}
+                            <input type="button" class="btn btn-primary col-span-2" value="Add Row"
+                            hx-get="/ignored_user_row"
+                            hx-swap="beforebegin" />
+                            <input id="submit-ignored-users" class="btn btn-primary col-span-2" type="submit"
                                 value="save" />
                         </div>
                     </form>

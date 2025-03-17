@@ -8,3 +8,7 @@ class AllowedUser(BaseModel):
 
 class AllowedUsersList(BaseModel):
     users: list[AllowedUser | None]
+
+
+class IgnoreUsersList(BaseModel):
+    users: list[str]

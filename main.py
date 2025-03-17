@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request
 from validate import Settings
-from utils import settings, save_json, voices, allowed_users, _allowed_users
-from allowed_user import AllowedUsersList, AllowedUser
+from utils import settings, save_json, voices, allowed_users, _allowed_users, ignored_users
+from allowed_user import AllowedUsersList, AllowedUser, IgnoreUsersList
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 
@@ -9,6 +9,20 @@ from fastapi.templating import Jinja2Templates
 templates = Jinja2Templates(directory="templates")
 
 app = FastAPI()
+
+
+@app.get("/", response_class=HTMLResponse)
+async def root(request: Request):
+    return templates.TemplateResponse(
+        request,
+        "index.html",
+        context={
+            "settings": settings,
+            "voices": voices,
+            "allowed_users": allowed_users,
+            "ignored_users": ignored_users,
+        },
+    )
 
 
 @app.post("/update_validation")
@@ -20,6 +34,7 @@ def update_validation(v: Settings):
     save_json(settings.model_dump(mode="json"), "settings.json")
 
 
+# ALLOWED USERS
 @app.post("/allowed_users")
 def update_allowed_users(users: AllowedUsersList):
     new_dict: dict = {}
@@ -44,11 +59,15 @@ def delete_allowed_user(request: Request, username: str):
     return templates.TemplateResponse(request, "delete.html")
 
 
-@app.get("/", response_class=HTMLResponse)
-async def root(request: Request):
-    return templates.TemplateResponse(
-        request, "index.html", context={"settings": settings, "voices": voices, "allowed_users": allowed_users}
-    )
+# IGNORE USERS
+@app.post("/ignored_users")
+def update_ignored_users(users: IgnoreUsersList):
+    save_json(users.users, "users/ignored.json")
+
+
+@app.get("/ignored_user_row")
+def add_ignored_user_row(request: Request):
+    return templates.TemplateResponse(request, "ignored_user_row.html")
 
 
 if __name__ == "__main__":
