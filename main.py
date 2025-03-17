@@ -50,15 +50,6 @@ def add_allowed_user_row(request: Request, _id: int):
     return templates.TemplateResponse(request, "allowed_user_row.html", context={"voices": voices, "id": _id})
 
 
-@app.delete("/allowed_users/{username:str}")
-def delete_allowed_user(request: Request, username: str):
-    global allowed_users, _allowed_users
-    del _allowed_users[username]
-    allowed_users = [AllowedUser(username=k, voice=v) for k, v in _allowed_users.items()]
-    save_json(_allowed_users, "users/allowed.json")
-    return templates.TemplateResponse(request, "delete.html")
-
-
 # IGNORE USERS
 @app.post("/ignored_users")
 def update_ignored_users(users: IgnoreUsersList):
