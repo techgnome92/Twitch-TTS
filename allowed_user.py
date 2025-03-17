@@ -7,4 +7,4 @@ class AllowedUser(BaseModel):
 
 
 class AllowedUsersList(BaseModel):
-    users: list[AllowedUser]
+    users: list[AllowedUser | None]

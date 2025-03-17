@@ -11,7 +11,10 @@
     <script src="https://unpkg.com/htmx.org@2.0.4"></script>
     <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/json-enc.js"></script>
     <script src="https://unpkg.com/htmx-ext-form-json"></script>
+    <script src="https://unpkg.com/hyperscript.org@0.9.14"></script>
+
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5.0.2/themes.css" rel="stylesheet" type="text/css" />
+
 </head>
 
 <body>
@@ -105,7 +108,7 @@
             Allowed Users
         </button>
         <dialog id="allowedUsers" class="modal">
-            <div class="modal-box grid grid-cols-2 gap-4">
+            <div class="modal-box grid grid-cols-3 gap-4">
                 <div class="modal-action contents ">
                     <form method="dialog" class="contents">
                         <div class="contents" hx-trigger="click from:#submit-allowed-users" hx-post="/allowed_users"
@@ -121,17 +124,19 @@
                                     <option {% if user["voice"]==voice %} selected {% endif %}>{{voice}}</option>
                                     {% endfor %}
                                 </select>
-
+                                <input type="button" class="btn btn-error" value="delete" hx-delete="/allowed_users/{{user['username']}}" hx-params="none"
+                                    hx-target="closest div" hx-swap="outerHTML">
                             </div>
                             {% endfor %}
-                            <input type="button" class="btn btn-primary col-span-2" value="Add Row"
+
+                            <input type="button" class="btn btn-primary col-span-3" value="Add Row"
                                 onclick="countAllowedUsers.value++" hx-get="/allowed_user_row" hx-include="[name='_id']"
                                 hx-swap="beforebegin" />
                             <!-- hidden element that holds the number of allowed user rows because sending lists is really annoying apparently -->
-                            <input id="countAllowedUsers" class="hidden" type="number" name="_id" min="{{allowed_users|length-1}}"
-                                value="{{allowed_users|length-1}}" />
+                            <input id="countAllowedUsers" class="hidden" type="number" name="_id" min="{{allowed_users|length}}"
+                                value="{{allowed_users|length}}" />
 
-                            <input id="submit-allowed-users" class="btn btn-primary col-span-2" type="submit" hx-params="not ['#countAllowedUsers']"
+                            <input id="submit-allowed-users" class="btn btn-primary col-span-3" type="submit" hx-params="not ['#countAllowedUsers']"
                                 value="save" />
                         </div>
                     </form>
