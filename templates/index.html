@@ -27,6 +27,11 @@
 
         <!-- IGNORED USERS -->
         {% include 'ignored_user.html' %}
+
+        <label for="play_tts">Play TTS</label>
+        <input id="play_tts" type="checkbox" class="toggle toggle-primary" name="on" hx-post="/toggle_play" hx-ext='json-enc' hx-swap="none"/>
+          
+          
     </main>
 
 </body>

@@ -9,6 +9,8 @@ templates = Jinja2Templates(directory="templates")
 
 app = FastAPI()
 
+TTS_RUNNING: bool = False
+
 
 @app.get("/", response_class=HTMLResponse)
 async def root(request: Request):
@@ -22,6 +24,12 @@ async def root(request: Request):
             "ignored_users": ignored_users,
         },
     )
+
+
+@app.post("/toggle_play")
+def toggle_play(on: dict):
+    global TTS_RUNNING
+    TTS_RUNNING = bool(on)
 
 
 @app.post("/update_validation")
