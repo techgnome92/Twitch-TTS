@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Request
 from validate import Settings
-from utils import settings, save_json, voices, allowed_users, ignored_users
+from utils import settings, save_json, voices, allowed_users, ignored_users, ignored_words, replace_words, regex_filter
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 
@@ -14,6 +14,7 @@ TTS_RUNNING: bool = False
 
 @app.get("/", response_class=HTMLResponse)
 async def root(request: Request):
+    print(ignored_words)
     return templates.TemplateResponse(
         request,
         "index.html",
@@ -22,6 +23,7 @@ async def root(request: Request):
             "voices": voices,
             "allowed_users": allowed_users,
             "ignored_users": ignored_users,
+            "ignored_words": ignored_words
         },
     )
 
@@ -58,13 +60,26 @@ def add_allowed_user_row(request: Request):
 @app.post("/ignored_users")
 def update_ignored_users(users: dict[str, list]):
     global ignored_users
-    ignored_users = set(users["users"]) if "users" in users else []
+    ignored_users = set(users["users"]) if "users" not in users else []
     save_json(list(ignored_users), "users/ignored.json")
 
 
 @app.get("/ignored_user_row")
 def add_ignored_user_row(request: Request):
     return templates.TemplateResponse(request, "ignored_user_row.html")
+
+
+# FILTER MESSAGE
+@app.post("/ignored_words")
+def update_word_ignore(words: dict[str, list]):
+    global ignored_words
+    ignored_words = set(words["words"]) if "words" in words else []
+    save_json(list(ignored_words), "filters/word_ignore.json")
+
+
+@app.get("/ignored_words_row")
+def add_ignored_word_row(request: Request):
+    return templates.TemplateResponse(request, "ignored_word_row.html")
 
 
 if __name__ == "__main__":
