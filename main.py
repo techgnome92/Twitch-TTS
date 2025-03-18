@@ -1,7 +1,6 @@
 from fastapi import FastAPI, Request
 from validate import Settings
 from utils import settings, save_json, voices, allowed_users, ignored_users
-from users_models import IgnoreUsersList
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 
@@ -52,7 +51,7 @@ def add_allowed_user_row(request: Request):
 def update_ignored_users(users: dict[str, list]):
     global ignored_users
     ignored_users = set(users["users"])
-    save_json(ignored_users, "users/ignored.json")
+    save_json(list(ignored_users), "users/ignored.json")
 
 
 @app.get("/ignored_user_row")
