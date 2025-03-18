@@ -1,6 +1,5 @@
 import json
 from validate import Settings
-from users_models import AllowedUser
 
 
 def load_json(fp: str):
@@ -19,5 +18,4 @@ voices = load_json("voices.json")
 ignored_users = load_json("users/ignored.json")
 
 
-_allowed_users = load_json("users/allowed.json")
-allowed_users = [AllowedUser(username=k, voice=v) for k, v in _allowed_users.items()]
+allowed_users = load_json("users/allowed.json")

@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request
 from validate import Settings
-from utils import settings, save_json, voices, allowed_users, _allowed_users, ignored_users
-from users_models import AllowedUsersList, IgnoreUsersList
+from utils import settings, save_json, voices, allowed_users, ignored_users
+from users_models import IgnoreUsersList
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 
@@ -36,23 +36,22 @@ def update_validation(v: Settings):
 
 # ALLOWED USERS
 @app.post("/allowed_users")
-def update_allowed_users(users: AllowedUsersList):
-    new_dict: dict = {}
-    for i in users.users:
-        if i is None:
-            continue
-        new_dict[i.username] = i.voice
-    save_json(new_dict, "users/allowed.json")
+def update_allowed_users(users: dict):
+    global allowed_users
+    allowed_users = users
+    save_json(users, "users/allowed.json")
 
 
 @app.get("/allowed_user_row")
-def add_allowed_user_row(request: Request, _id: int):
-    return templates.TemplateResponse(request, "allowed_user_row.html", context={"voices": voices, "id": _id})
+def add_allowed_user_row(request: Request):
+    return templates.TemplateResponse(request, "allowed_user_row.html", context={"voices": voices})
 
 
 # IGNORE USERS
 @app.post("/ignored_users")
 def update_ignored_users(users: IgnoreUsersList):
+    global ignored_users
+    ignored_users = users.users
     save_json(users.users, "users/ignored.json")
 
 

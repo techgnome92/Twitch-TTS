@@ -1,10 +1,12 @@
 <div class="contents">
-    <input class="text-center" type="text" name="users[{{id}}][username]" placeholder="Allowed User">
-    <select class="select capitalize" name="users[{{id}}][voice]">
+    <input class="text-center" type="text" placeholder="Allowed User">
+    <select class="select capitalize">
         <option>default</option>
         {% for voice in voices.keys()%}
         <option>{{voice}}</option>
         {% endfor %}
     </select>
+    <input
+    _="on change from previous <input/> set my.name to its.value end on change from previous <select/> set my.value to its.value end" />
     <input type="button" class="btn btn-error" value="delete" _="on click remove closest parent <div/>">
 </div>
