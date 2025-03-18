@@ -58,7 +58,7 @@ def add_allowed_user_row(request: Request):
 @app.post("/ignored_users")
 def update_ignored_users(users: dict[str, list]):
     global ignored_users
-    ignored_users = set(users["users"])
+    ignored_users = set(users["users"]) if "users" in users else []
     save_json(list(ignored_users), "users/ignored.json")
 
 
