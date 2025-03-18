@@ -36,10 +36,10 @@ def update_validation(v: Settings):
 
 # ALLOWED USERS
 @app.post("/allowed_users")
-def update_allowed_users(users: dict):
+def update_allowed_users(users: dict[str, str]):
     global allowed_users
     allowed_users = users
-    save_json(users, "users/allowed.json")
+    save_json(allowed_users, "users/allowed.json")
 
 
 @app.get("/allowed_user_row")
@@ -49,10 +49,10 @@ def add_allowed_user_row(request: Request):
 
 # IGNORE USERS
 @app.post("/ignored_users")
-def update_ignored_users(users: IgnoreUsersList):
+def update_ignored_users(users: dict[str, list]):
     global ignored_users
-    ignored_users = users.users
-    save_json(users.users, "users/ignored.json")
+    ignored_users = set(users["users"])
+    save_json(ignored_users, "users/ignored.json")
 
 
 @app.get("/ignored_user_row")
