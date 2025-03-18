@@ -17,7 +17,7 @@
                             <option {% if set_voice==voice %} selected {% endif %}>{{voice}}</option>
                             {% endfor %}
                         </select>
-                        <input name="{{user}}" value="{{set_voice}}"
+                        <input class="hidden" name="{{user}}" value="{{set_voice}}"
                             _="on change from previous <input/> set my.name to its.value end on change from previous <select/> set my.value to its.value end" />
 
                         <input type="button" class="btn btn-error" value="delete"

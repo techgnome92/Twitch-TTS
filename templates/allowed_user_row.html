@@ -6,7 +6,7 @@
         <option>{{voice}}</option>
         {% endfor %}
     </select>
-    <input
-    _="on change from previous <input/> set my.name to its.value end on change from previous <select/> set my.value to its.value end" />
+    <input class="hidden"
+        _="on change from previous <input/> set my.name to its.value end on change from previous <select/> set my.value to its.value end" />
     <input type="button" class="btn btn-error" value="delete" _="on click remove closest parent <div/>">
 </div>
