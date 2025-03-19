@@ -14,7 +14,6 @@ TTS_RUNNING: bool = False
 
 @app.get("/", response_class=HTMLResponse)
 async def root(request: Request):
-    print(ignored_words)
     return templates.TemplateResponse(
         request,
         "index.html",
@@ -23,7 +22,8 @@ async def root(request: Request):
             "voices": voices,
             "allowed_users": allowed_users,
             "ignored_users": ignored_users,
-            "ignored_words": ignored_words
+            "ignored_words": ignored_words,
+            "replace_words": replace_words
         },
     )
 
@@ -80,6 +80,18 @@ def update_word_ignore(words: dict[str, list]):
 @app.get("/ignored_words_row")
 def add_ignored_word_row(request: Request):
     return templates.TemplateResponse(request, "ignored_word_row.html")
+
+
+@app.post("/replace_words")
+def update_replace_words(words: dict[str, str]):
+    global replace_words
+    replace_words = words
+    save_json(replace_words, "filters/word_replace.json")
+
+
+@app.get("/word_replace_row")
+def add_word_replace_row(request: Request):
+    return templates.TemplateResponse(request, "word_replace_row.html")
 
 
 if __name__ == "__main__":
