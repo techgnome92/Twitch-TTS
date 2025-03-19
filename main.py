@@ -25,6 +25,7 @@ async def root(request: Request):
             "ignored_words": ignored_words,
             "replace_words": replace_words,
             "regex_filters": regex_filter,
+            "TTS_RUNNING": TTS_RUNNING
         },
     )
 

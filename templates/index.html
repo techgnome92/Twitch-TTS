@@ -29,7 +29,7 @@
         {% include 'users/ignored_user.html' %}
 
         <label for="play_tts">Play TTS</label>
-        <input id="play_tts" type="checkbox" class="toggle toggle-primary" name="on" hx-post="/toggle_play" hx-ext='json-enc' hx-swap="none"/>
+        <input id="play_tts" type="checkbox" {% if TTS_RUNNING %} checked {% endif %} class="toggle toggle-primary" name="on" hx-post="/toggle_play" hx-ext='json-enc' hx-swap="none"/>
           
 
         <!-- IGNORE WORDS -->
