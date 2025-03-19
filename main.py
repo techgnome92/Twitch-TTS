@@ -23,7 +23,8 @@ async def root(request: Request):
             "allowed_users": allowed_users,
             "ignored_users": ignored_users,
             "ignored_words": ignored_words,
-            "replace_words": replace_words
+            "replace_words": replace_words,
+            "regex_filters": regex_filter,
         },
     )
 
@@ -92,6 +93,18 @@ def update_replace_words(words: dict[str, str]):
 @app.get("/word_replace_row")
 def add_word_replace_row(request: Request):
     return templates.TemplateResponse(request, "word_replace_row.html")
+
+
+@app.post("/regex_filter")
+def update_regex_filter(regex: dict[str, list]):
+    global regex_filter
+    regex_filter = set(regex["regex"])
+    save_json(list(regex_filter), "filters/regex_filters.json")
+
+
+@app.get("/regex_filter_row")
+def add_regex_filter_row(request: Request):
+    return templates.TemplateResponse(request, "regex_filter_row.html")
 
 
 if __name__ == "__main__":

@@ -98,6 +98,36 @@
                 </div>
             </div>
         </dialog>
+
+
+        <button class="btn btn-primary" onclick="regexFilter.showModal()">
+            Regex Filter
+        </button>
+        <dialog id="regexFilter" class="modal">
+            <div class="modal-box grid grid-cols-2 gap-4">
+                <div class="modal-action contents ">
+                    <form method="dialog" class="contents">
+                        <div class="contents" hx-trigger="click from:#submit-regex_filter" hx-post="/regex_filter"
+                            hx-ext="form-json" hx-swap="none">
+        
+                            {% for regex in regex_filters %}
+                            <div class="contents">
+                                <input class="text-center" type="text" name="regex[]"
+                                    value="{{regex}}" placeholder="Regex">
+        
+                                <input type="button" class="btn btn-error" value="delete" _="on click remove closest parent <div/>">
+                            </div>
+                            {% endfor %}
+                            <input type="button" class="btn btn-primary col-span-2" value="Add Row"
+                            hx-get="/regex_filter_row"
+                            hx-swap="beforebegin" />
+                            <input id="submit-regex_filter" class="btn btn-primary col-span-2" type="submit"
+                                value="save" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </dialog>
     </main>
 
 </body>
