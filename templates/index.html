@@ -23,111 +23,24 @@
         {% include 'settings.html' %}
 
         <!-- ALLOWED USERS -->
-        {% include 'allowed_user.html' %}
+        {% include 'users/allowed_user.html' %}
 
         <!-- IGNORED USERS -->
-        {% include 'ignored_user.html' %}
+        {% include 'users/ignored_user.html' %}
 
         <label for="play_tts">Play TTS</label>
         <input id="play_tts" type="checkbox" class="toggle toggle-primary" name="on" hx-post="/toggle_play" hx-ext='json-enc' hx-swap="none"/>
           
 
         <!-- IGNORE WORDS -->
-        <button class="btn btn-primary" onclick="ignoredWords.showModal()">
-            Ignored Words
-        </button>
-        <dialog id="ignoredWords" class="modal">
-            <div class="modal-box grid grid-cols-2 gap-4">
-                <div class="modal-action contents ">
-                    <form method="dialog" class="contents">
-                        <div class="contents" hx-trigger="click from:#submit-ignored-words" hx-post="/ignored_words"
-                            hx-ext="form-json" hx-swap="none">
-        
-                            {% for word in ignored_words %}
-                            <div class="contents">
-                                <input class="text-center" type="text" name="words[]"
-                                    value="{{word}}" placeholder="Ignored word">
-        
-                                <input type="button" class="btn btn-error" value="delete" _="on click remove closest parent <div/>">
-                            </div>
-                            {% endfor %}
-                            <input type="button" class="btn btn-primary col-span-2" value="Add Row"
-                            hx-get="/ignored_words_row"
-                            hx-swap="beforebegin" />
-                            <input id="submit-ignored-words" class="btn btn-primary col-span-2" type="submit"
-                                value="save" />
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </dialog>
-        
+        {% include 'filters/ignore_words.html' %}
 
+        <!-- REPLACE WORDS -->
+        {% include 'filters/replace_words.html' %}
 
-        <button class="btn btn-primary" onclick="wordReplace.showModal()">
-            Replace Words
-        </button>
-        <dialog id="wordReplace" class="modal">
-            <div class="modal-box grid grid-cols-3 gap-4">
-                <div class="modal-action contents ">
-                    <form method="dialog" class="contents">
-                        <div class="contents" hx-trigger="click from:#submit-replace_word" hx-post="/replace_words"
-                            hx-ext="form-json" hx-swap="none">
-        
-                            {% for word, replacement in replace_words.items() %}
-                            <div class="contents">
-                                <input class="text-center" type="text" value="{{word}}" placeholder="Word" hx-inclue="">
-                                <input class="hidden" name="{{word}}" value="{{replacement}}"
-                                    _="on change from previous <input/> set my.name to its.value end on change from next <input/> set my.value to its.value end" />
+        <!-- REGEX FILTER -->
+        {% include 'filters/replace_words.html' %}
 
-                                    <input class="text-center" type="text" value="{{replacement}}" placeholder="Replacement" hx-inclue="">
-        
-                                <input type="button" class="btn btn-error" value="delete"
-                                    _="on click remove closest parent <div/>">
-                            </div>
-                            {% endfor %}
-        
-                            <input type="button" class="btn btn-primary col-span-3" value="Add Row" hx-get="/word_replace_row"
-                                hx-swap="beforebegin" />
-        
-        
-                            <input id="submit-replace_word" class="btn btn-primary col-span-3" type="submit" value="save" />
-                        </div>
-        
-                    </form>
-                </div>
-            </div>
-        </dialog>
-
-
-        <button class="btn btn-primary" onclick="regexFilter.showModal()">
-            Regex Filter
-        </button>
-        <dialog id="regexFilter" class="modal">
-            <div class="modal-box grid grid-cols-2 gap-4">
-                <div class="modal-action contents ">
-                    <form method="dialog" class="contents">
-                        <div class="contents" hx-trigger="click from:#submit-regex_filter" hx-post="/regex_filter"
-                            hx-ext="form-json" hx-swap="none">
-        
-                            {% for regex in regex_filters %}
-                            <div class="contents">
-                                <input class="text-center" type="text" name="regex[]"
-                                    value="{{regex}}" placeholder="Regex">
-        
-                                <input type="button" class="btn btn-error" value="delete" _="on click remove closest parent <div/>">
-                            </div>
-                            {% endfor %}
-                            <input type="button" class="btn btn-primary col-span-2" value="Add Row"
-                            hx-get="/regex_filter_row"
-                            hx-swap="beforebegin" />
-                            <input id="submit-regex_filter" class="btn btn-primary col-span-2" type="submit"
-                                value="save" />
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </dialog>
     </main>
 
 </body>

@@ -54,7 +54,7 @@ def update_allowed_users(users: dict[str, str]):
 
 @app.get("/allowed_user_row")
 def add_allowed_user_row(request: Request):
-    return templates.TemplateResponse(request, "allowed_user_row.html", context={"voices": voices})
+    return templates.TemplateResponse(request, "users/allowed_user_row.html", context={"voices": voices})
 
 
 # IGNORE USERS
@@ -67,7 +67,7 @@ def update_ignored_users(users: dict[str, list]):
 
 @app.get("/ignored_user_row")
 def add_ignored_user_row(request: Request):
-    return templates.TemplateResponse(request, "ignored_user_row.html")
+    return templates.TemplateResponse(request, "users/ignored_user_row.html")
 
 
 # FILTER MESSAGE
@@ -80,7 +80,7 @@ def update_word_ignore(words: dict[str, list]):
 
 @app.get("/ignored_words_row")
 def add_ignored_word_row(request: Request):
-    return templates.TemplateResponse(request, "ignored_word_row.html")
+    return templates.TemplateResponse(request, "filters/ignored_word_row.html")
 
 
 @app.post("/replace_words")
@@ -92,7 +92,7 @@ def update_replace_words(words: dict[str, str]):
 
 @app.get("/word_replace_row")
 def add_word_replace_row(request: Request):
-    return templates.TemplateResponse(request, "word_replace_row.html")
+    return templates.TemplateResponse(request, "filters/word_replace_row.html")
 
 
 @app.post("/regex_filter")
@@ -104,7 +104,7 @@ def update_regex_filter(regex: dict[str, list]):
 
 @app.get("/regex_filter_row")
 def add_regex_filter_row(request: Request):
-    return templates.TemplateResponse(request, "regex_filter_row.html")
+    return templates.TemplateResponse(request, "filters/regex_filter_row.html")
 
 
 if __name__ == "__main__":
