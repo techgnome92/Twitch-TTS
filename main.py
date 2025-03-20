@@ -76,36 +76,36 @@ def add_ignored_user_row(request: Request):
 def update_word_ignore(words: dict[str, list]):
     global ignored_words
     ignored_words = set(words["words"]) if "words" in words else []
-    save_json(list(ignored_words), "filters/word_ignore.json")
+    save_json(list(ignored_words), "filters_json/word_ignore.json")
 
 
 @app.get("/ignored_words_row")
 def add_ignored_word_row(request: Request):
-    return templates.TemplateResponse(request, "filters/ignored_word_row.html")
+    return templates.TemplateResponse(request, "filters_json/ignored_word_row.html")
 
 
 @app.post("/replace_words")
 def update_replace_words(words: dict[str, str]):
     global replace_words
     replace_words = words
-    save_json(replace_words, "filters/word_replace.json")
+    save_json(replace_words, "filters_json/word_replace.json")
 
 
 @app.get("/word_replace_row")
 def add_word_replace_row(request: Request):
-    return templates.TemplateResponse(request, "filters/word_replace_row.html")
+    return templates.TemplateResponse(request, "filters_json/word_replace_row.html")
 
 
 @app.post("/regex_filter")
 def update_regex_filter(regex: dict[str, list]):
     global regex_filter
     regex_filter = set(regex["regex"])
-    save_json(list(regex_filter), "filters/regex_filters.json")
+    save_json(list(regex_filter), "filters_json/regex_filters.json")
 
 
 @app.get("/regex_filter_row")
 def add_regex_filter_row(request: Request):
-    return templates.TemplateResponse(request, "filters/regex_filter_row.html")
+    return templates.TemplateResponse(request, "filters_json/regex_filter_row.html")
 
 
 if __name__ == "__main__":
