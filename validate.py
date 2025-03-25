@@ -32,10 +32,10 @@ def validate_message(
         if event.source_broadcaster_user_name:
             return False
 
-    if event.chatter_user_login == users_ignored:
+    if event.chatter_user_name in users_ignored:
         return False
 
-    if event.chatter_user_login == users_allowed:
+    if event.chatter_user_name in users_allowed:
         return True
 
     if settings.EVERYONE_ALLOWED:
