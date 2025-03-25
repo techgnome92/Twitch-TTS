@@ -28,13 +28,18 @@ async def run_twitch():
         'user_id': secrets["CHATTER_USER_ID"]
     }
     await eventsub._subscribe('channel.chat.message', '1', param, on_message, ChannelChatMessageSourceEvent)
+    return eventsub, twitch
+    # try:
+    #     wait_for_user_input()
+    # finally:
+    #     print("The bot is shutting down")
+    #     await eventsub.stop()
+    #     await twitch.close()
 
-    try:
-        wait_for_user_input()
-    finally:
-        print("The bot is shutting down")
-        await eventsub.stop()
-        await twitch.close()
+
+async def exit_application(eventsub, twitch):
+    await eventsub.stop()
+    await twitch.close()
 
 
 def wait_for_user_input():

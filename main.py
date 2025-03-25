@@ -1,15 +1,29 @@
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 from validate import Settings
 from utils import settings, save_json, voices, allowed_users, ignored_users, ignored_words, replace_words, regex_filter
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-
+from __twitch.twitch import run_twitch
 
 templates = Jinja2Templates(directory="templates")
 
-app = FastAPI()
 
 TTS_RUNNING: bool = False
+
+lifespan_events = {}
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    lifespan_events["eventsub"], lifespan_events["twitch"] = await run_twitch()
+    print("Bot is starting up")
+    yield
+    await lifespan_events["eventsub"].stop()
+    await lifespan_events["twitch"].close()
+    print("Bot is shutting down")
+
+app = FastAPI(lifespan=lifespan)
 
 
 @app.get("/", response_class=HTMLResponse)
