@@ -1,4 +1,4 @@
-from twitchAPI.object.eventsub import ChannelChatMessageEvent
+from __twitch.ChannelChatMessage import ChannelChatMessageSourceEvent
 from pydantic import BaseModel
 
 
@@ -15,15 +15,22 @@ class Settings(BaseModel):
     EVERYONE_ALLOWED: bool = False
     SAY_CHEER_EMOTE: bool = False
     SAY_USERNAME: bool = False
+    READ_SHARED_CHAT: bool = False
     TTS_VOICE: str = "ms_sam"
 
 
-def validate_message(message: ChannelChatMessageEvent, settings: Settings, users_allowed: list, users_ignored: list):
+def validate_message(
+    message: ChannelChatMessageSourceEvent, settings: Settings, users_allowed: list, users_ignored: list
+):
     event = message.event
     badges = [badge.set_id for badge in event.badges]
 
     if not message:
         return False
+
+    if settings.READ_SHARED_CHAT is False:
+        if event.source_broadcaster_user_name:
+            return False
 
     if event.chatter_user_login == users_ignored:
         return False
