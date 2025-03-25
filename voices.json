@@ -1,7 +1,7 @@
 {
-    "sam": "MSSam",
-    "mike": "MSMike",
-    "mary": "MSMary",
-    "david": "TTS_MS_EN-US_DAVID_11.0",
-    "zira": "TTS_MS_EN-US_ZIRA_11.0"
+    "microsoft|sam": "MSSam",
+    "microsoft|mike": "MSMike",
+    "microsoft|mary": "MSMary",
+    "microsoft|david": "TTS_MS_EN-US_DAVID_11.0",
+    "microsoft|zira": "TTS_MS_EN-US_ZIRA_11.0"
 }

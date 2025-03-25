@@ -8,11 +8,11 @@ import simpleaudio as sa
 
 
 voice_options = {
-    "sam": "MSSam",
-    "mike": "MSMike",
-    "mary": "MSMary",
-    "david": "TTS_EN-US_DAVID_11.0",
-    "zira": "TTS_MS_EN-US_ZIRA_11.0",
+    "microsoft|sam": "MSSam",
+    "microsoft|mike": "MSMike",
+    "microsoft|mary": "MSMary",
+    "microsoft|david": "TTS_EN-US_DAVID_11.0",
+    "microsoft|zira": "TTS_MS_EN-US_ZIRA_11.0",
     "dectalk": "dectalk"
 }
 
@@ -51,7 +51,12 @@ class Message:
         session = str(uuid.uuid1())
         temp_file = f"{session}.wav"
 
-        generate_wav(temp_file, self.text, rate=self.rate, voice=voice_options[self.allowed_users[self.user]])
+        voice = voice_options[self.settings.TTS_VOICE]
+        if self.user in self.allowed_users:
+            if self.allowed_users[self.user] in voice_options:
+                voice = voice_options[self.allowed_users[self.user]]
+
+        generate_wav(temp_file, self.text, rate=self.rate, voice=voice)
 
         wave_obj = sa.WaveObject.from_wave_file(temp_file)
         play_obj = wave_obj.play()

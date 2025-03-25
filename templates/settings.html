@@ -67,7 +67,7 @@
                     <label class="text-right" for="voices">Default Voice</label>
                     <select class="select capitalize" name="TTS_VOICE">
                         {% for voice in voices.keys()%}
-                        <option {% if settings["TTS_VOICE"]==voice %} selected {% endif %}>{{voice}}</option>
+                        <option {% if settings["TTS_VOICE"]==voice %} selected {% endif %} label="{{voice.split('|')[1]}}" value="{{voice}}"></option>
                         {% endfor %}
                     </select>
                     

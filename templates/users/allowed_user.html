@@ -14,7 +14,7 @@
                         <select class="select capitalize">
                             <option>default</option>
                             {% for voice in voices.keys()%}
-                            <option {% if set_voice==voice %} selected {% endif %}>{{voice}}</option>
+                            <option {% if set_voice==voice %} selected {% endif %}label="{{voice.split('|')[1]}}" value="{{voice}}">{{voice}}</option>
                             {% endfor %}
                         </select>
                         <input class="hidden" name="{{user}}" value="{{set_voice}}"
