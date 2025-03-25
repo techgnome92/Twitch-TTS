@@ -1,7 +1,7 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 from validate import Settings
-from utils import settings, save_json, voices, allowed_users, ignored_users, ignored_words, replace_words, regex_filter
+from utils import save_json, voices
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from __twitch.twitch import run_twitch
