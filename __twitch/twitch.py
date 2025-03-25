@@ -2,7 +2,7 @@ from twitchAPI.twitch import Twitch
 from twitchAPI.oauth import UserAuthenticationStorageHelper
 from twitchAPI.type import AuthScope
 from twitchAPI.eventsub.websocket import EventSubWebsocket
-from twitch.ChannelChatMessage import ChannelChatMessageSourceBroadcasterEvent
+from __twitch.ChannelChatMessage import ChannelChatMessageSourceEvent
 
 import asyncio
 from utils import secrets
@@ -27,7 +27,7 @@ async def run_twitch():
         'broadcaster_user_id': secrets["BROADCASTER_USER_ID"],
         'user_id': secrets["CHATTER_USER_ID"]
     }
-    await eventsub._subscribe('channel.chat.message', '1', param, on_message, ChannelChatMessageSourceBroadcasterEvent)
+    await eventsub._subscribe('channel.chat.message', '1', param, on_message, ChannelChatMessageSourceEvent)
 
     try:
         wait_for_user_input()
