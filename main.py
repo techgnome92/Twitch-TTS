@@ -40,7 +40,7 @@ async def root(request: Request):
             "ignored_words": Message.ignored_words,
             "replace_words": Message.replace_words,
             "regex_filters": Message.regex_filter,
-            "TTS_RUNNING": Message.TTS_RUNNING
+            "TTS_RUNNING": TTS_RUNNING
         },
     )
 
