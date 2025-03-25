@@ -6,13 +6,15 @@ from __twitch.ChannelChatMessage import ChannelChatMessageSourceEvent
 
 import asyncio
 from utils import secrets
+from message import Message
 
 SCOPES = [AuthScope.USER_READ_CHAT]
 
 
-async def on_message(message):
-    # event = message.event
-    print(message.__dict__)
+async def on_message(message: ChannelChatMessageSourceEvent):
+    m = Message(message)
+    if m.is_valid:
+        m.say_message()
 
 
 async def run_twitch():
@@ -29,12 +31,6 @@ async def run_twitch():
     }
     await eventsub._subscribe('channel.chat.message', '1', param, on_message, ChannelChatMessageSourceEvent)
     return eventsub, twitch
-    # try:
-    #     wait_for_user_input()
-    # finally:
-    #     print("The bot is shutting down")
-    #     await eventsub.stop()
-    #     await twitch.close()
 
 
 async def exit_application(eventsub, twitch):
