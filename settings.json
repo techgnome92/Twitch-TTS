@@ -12,5 +12,6 @@
     "SAY_CHEER_EMOTE": false,
     "SAY_USERNAME": false,
     "READ_SHARED_CHAT": false,
-    "TTS_VOICE": "sam"
+    "TTS_VOICE": "david",
+    "TTS_RATE": 125
 }
