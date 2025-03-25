@@ -17,6 +17,7 @@ class Settings(BaseModel):
     SAY_USERNAME: bool = False
     READ_SHARED_CHAT: bool = False
     TTS_VOICE: str = "ms_sam"
+    TTS_RATE: int = 120
 
 
 def validate_message(
