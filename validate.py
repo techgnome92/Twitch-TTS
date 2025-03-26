@@ -37,7 +37,8 @@ def validate_message(
         return False
 
     if event.chatter_user_name in users_allowed:
-        return True
+        if users_allowed[event.chatter_user_name][1] is True:
+            return True
 
     if settings.EVERYONE_ALLOWED:
         return True

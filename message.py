@@ -51,7 +51,7 @@ class Message:
 
         voice = self.settings.TTS_VOICE
         if self.user in self.allowed_users:
-            if self.allowed_users[self.user] in voice_options:
+            if self.allowed_users[self.user][0] in voice_options:
                 voice = self.allowed_users[self.user]
 
         generate_wav(temp_file, self.text, rate=self.rate, voice=voice)
