@@ -1,20 +1,18 @@
 from __twitch.ChannelChatMessage import ChannelChatMessageSourceEvent
 from validate import validate_message, Settings
 from filters import filter_message
-from utils import settings, allowed_users, ignored_users, ignored_words, replace_words, regex_filter
+from utils import (
+    settings,
+    allowed_users,
+    ignored_users,
+    ignored_words,
+    replace_words,
+    regex_filter,
+    voices as voice_options,
+)
 import os, uuid  # noqa
 from tts import generate_wav
 import simpleaudio as sa
-
-
-voice_options = {
-    "microsoft|sam": "MSSam",
-    "microsoft|mike": "MSMike",
-    "microsoft|mary": "MSMary",
-    "microsoft|david": "TTS_EN-US_DAVID_11.0",
-    "microsoft|zira": "TTS_MS_EN-US_ZIRA_11.0",
-    "dectalk": "dectalk"
-}
 
 
 class Message:
@@ -51,10 +49,10 @@ class Message:
         session = str(uuid.uuid1())
         temp_file = f"{session}.wav"
 
-        voice = voice_options[self.settings.TTS_VOICE]
+        voice = self.settings.TTS_VOICE
         if self.user in self.allowed_users:
             if self.allowed_users[self.user] in voice_options:
-                voice = voice_options[self.allowed_users[self.user]]
+                voice = self.allowed_users[self.user]
 
         generate_wav(temp_file, self.text, rate=self.rate, voice=voice)
 
