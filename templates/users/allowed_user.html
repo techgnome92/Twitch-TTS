@@ -2,35 +2,49 @@
     Allowed Users
 </button>
 <dialog id="allowedUsers" class="modal">
-    <div class="modal-box grid grid-cols-3 gap-4">
+    <div class="modal-box grid grid-cols-4 gap-4">
         <div class="modal-action contents ">
             <form method="dialog" class="contents">
                 <div class="contents" hx-trigger="click from:#submit-allowed-users" hx-post="/allowed_users"
                     hx-ext="form-json" hx-swap="none">
 
-                    {% for user, set_voice in allowed_users.items() %}
+                    {% for user, data in allowed_users.items() %}
                     <div class="contents">
-                        <input class="text-center" type="text" value="{{user}}" placeholder="Allowed User" hx-inclue="">
-                        <select class="select capitalize">
+                        <input class="name-change text-center" type="text" value="{{user}}" placeholder="Allowed User"
+                            hx-inclue="">
+                        <select class="select capitalize" name="{{user}}"
+                            _="on change from .name-change set my.name to its.value">
                             <option>default</option>
                             {% for voice in voices.keys()%}
                             {% set v = voice.split("|") %}
-                            <option {% if set_voice==voice %} selected {% endif %} label="{{v[1]}} ({{v[0]}})" value="{{voice}}">{{voice}}</option>
+                            <option {% if data[0]==voice %} selected {% endif %} label="{{v[1]}} ({{v[0]}})"
+                                value="{{voice}}">{{voice}}</option>
                             {% endfor %}
                         </select>
-                        <input class="hidden" name="{{user}}" value="{{set_voice}}"
-                            _="on change from previous <input/> set my.name to its.value end on change from previous <select/> set my.value to its.value end" />
 
-                        <input type="button" class="btn btn-error" value="delete"
+                        <input type="checkbox" class="hidden" name="{{user}}" value="false" 
+                            {% if data[1] is false %} checked {% endif %} 
+                            _="on change from next <input/> set me.checked to not it.checked end
+                                on change from previous .name-change set my.name to its.value end
+                        "/>
+                        <input type="checkbox" class="toggle toggle-primary" name="{{user}}" value="true"
+                            {% if data[1] is true %} checked {% endif %} 
+                            _="on change from previous .name-change set my.name to its.value end
+                        " />
+
+
+
+
+                        <input type="button" class="btn btn-error" name="{{user}}" value="delete"
                             _="on click remove closest parent <div/>">
                     </div>
                     {% endfor %}
 
-                    <input type="button" class="btn btn-primary col-span-3" value="Add Row" hx-get="/allowed_user_row"
+                    <input type="button" class="btn btn-primary col-span-4" value="Add Row" hx-get="/allowed_user_row"
                         hx-swap="beforebegin" />
 
 
-                    <input id="submit-allowed-users" class="btn btn-primary col-span-3" type="submit" value="save" />
+                    <input id="submit-allowed-users" class="btn btn-primary col-span-4" type="submit" value="save" />
                 </div>
 
             </form>

@@ -67,7 +67,7 @@ def update_validation(_settings: Settings):
 
 # ALLOWED USERS
 @app.post("/allowed_users")
-def update_allowed_users(users: dict[str, str]):
+def update_allowed_users(users: dict[str, tuple[str, bool]]):
     Message.allowed_users = users
     save_json(Message.allowed_users, "users/allowed.json")
 

@@ -1,12 +1,18 @@
 <div class="contents">
-    <input class="text-center" type="text" placeholder="Allowed User">
-    <select class="select capitalize">
+    <input class="name-change text-center" type="text" placeholder="Allowed User">
+    <select class="select capitalize" _="on change from .name-change set my.name to its.value">
         <option>default</option>
         {% for voice in voices.keys()%}
         <option>{{voice}}</option>
         {% endfor %}
     </select>
-    <input class="hidden" value="default"
-        _="on change from previous <input/> set my.name to its.value end on change from previous <select/> set my.value to its.value end" />
+    <input type="checkbox" class="hidden" value="false" checked 
+        _="on change from next <input/> set me.checked to not it.checked end
+           on change from previous .name-change set my.name to its.value end
+        "
+    />
+    <input type="checkbox" class="toggle toggle-primary" value="true"
+        _="on change from previous .name-change set my.name to its.value end" 
+    />
     <input type="button" class="btn btn-error" value="delete" _="on click remove closest parent <div/>">
 </div>
