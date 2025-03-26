@@ -6,6 +6,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from __twitch.twitch import run_twitch
 from message import Message
+import simpleaudio as sa
 
 templates = Jinja2Templates(directory="templates")
 
@@ -48,7 +49,8 @@ async def root(request: Request):
 @app.post("/toggle_play")
 def toggle_play(on: dict):
     Message.TTS_RUNNING = bool(on)
-
+    if Message.TTS_RUNNING is False:
+        sa.stop_all()
 
 @app.post("/update_validation")
 def update_validation(_settings: Settings):
