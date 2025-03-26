@@ -32,6 +32,9 @@
         <input id="play_tts" type="checkbox" {% if TTS_RUNNING %} checked {% endif %} class="toggle toggle-primary" name="on" hx-post="/toggle_play" hx-ext='json-enc' hx-swap="none"/>
           
 
+        <!-- <label for="skip_tts">Skip TTS</label> -->
+        <input id="skip_tts" type="button"class="btn btn-primary" hx-post="/skip_message" hx-ext='json-enc' hx-swap="none" value="Skip Message"/>
+
         <!-- IGNORE WORDS -->
         {% include 'filters/ignore_words.html' %}
 

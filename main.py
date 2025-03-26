@@ -52,6 +52,12 @@ def toggle_play(on: dict):
     if Message.TTS_RUNNING is False:
         sa.stop_all()
 
+
+@app.post("/skip_message")
+def skip_message():
+    sa.stop_all()
+
+
 @app.post("/update_validation")
 def update_validation(_settings: Settings):
     Message.settings = _settings
