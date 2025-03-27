@@ -1,23 +1,5 @@
 from twitch.ChannelChatMessage import ChannelChatMessageSourceEvent
-from pydantic import BaseModel
-
-
-class Settings(BaseModel):
-    BROADCASTER_ALLOWED: bool = False
-    SUBSCRIBERS_ALLOWED: bool = False
-    VIP_ALLOWED: bool = False
-    TURBO_ALLOWED: bool = False
-    MODERATOR_ALLOWED: bool = False
-    BIT_DONATION_ALLOWED: bool = False
-    BIT_DONATION_AMOUNT: int = 100
-    CHANNEL_POINT_ALLOWED: bool = False
-    CHANNEL_POINT_ID: str = ""
-    EVERYONE_ALLOWED: bool = False
-    SAY_CHEER_EMOTE: bool = False
-    SAY_USERNAME: bool = False
-    READ_SHARED_CHAT: bool = False
-    TTS_VOICE: str = "microsoft|sam"
-    TTS_RATE: int = 120
+from utils import Settings
 
 
 def validate_message(
