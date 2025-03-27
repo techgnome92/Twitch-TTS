@@ -1,4 +1,4 @@
-from __twitch.ChannelChatMessage import ChannelChatMessageSourceEvent
+from twitch.ChannelChatMessage import ChannelChatMessageSourceEvent
 from pydantic import BaseModel
 
 

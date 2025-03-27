@@ -12,6 +12,6 @@
     "SAY_CHEER_EMOTE": false,
     "SAY_USERNAME": false,
     "READ_SHARED_CHAT": false,
-    "TTS_VOICE": "microsoft|david",
+    "TTS_VOICE": "microsoft|sam",
     "TTS_RATE": 125
 }

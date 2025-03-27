@@ -4,7 +4,7 @@ from validate import Settings
 from utils import save_json, voices
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from __twitch.twitch import run_twitch
+from twitch.twitch import run_twitch
 from message import Message
 import simpleaudio as sa
 

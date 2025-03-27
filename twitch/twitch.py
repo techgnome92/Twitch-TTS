@@ -2,7 +2,7 @@ from twitchAPI.twitch import Twitch
 from twitchAPI.oauth import UserAuthenticationStorageHelper
 from twitchAPI.type import AuthScope
 from twitchAPI.eventsub.websocket import EventSubWebsocket
-from __twitch.ChannelChatMessage import ChannelChatMessageSourceEvent
+from twitch.ChannelChatMessage import ChannelChatMessageSourceEvent
 
 import asyncio
 from utils import secrets

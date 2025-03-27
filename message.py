@@ -1,4 +1,4 @@
-from __twitch.ChannelChatMessage import ChannelChatMessageSourceEvent
+from twitch.ChannelChatMessage import ChannelChatMessageSourceEvent
 from validate import validate_message, Settings
 from filters import filter_message
 from utils import (
