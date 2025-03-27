@@ -10,6 +10,7 @@ from utils import (
     replace_words,
     regex_filter,
     voices as voice_options,
+    save_json
 )
 import os, uuid  # noqa
 from tts import generate_wav
@@ -63,5 +64,4 @@ class Message:
         os.remove(temp_file)
 
     def save_text_to_file(self):
-        with open(secrets["OBS_TEXT_FILE_PATH"], "w") as f:
-            f.write(self.text)
+        save_json(self.data.to_dict(include_none_values=True), secrets["LATEST_MESSAGE_JSON"])
