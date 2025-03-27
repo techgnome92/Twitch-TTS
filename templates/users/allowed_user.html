@@ -2,12 +2,18 @@
     Allowed Users
 </button>
 <dialog id="allowedUsers" class="modal">
-    <div class="modal-box grid grid-cols-4 gap-4">
+    <div class="modal-box grid grid-cols-[2fr_2fr_1fr_1fr] gap-4 ">
         <div class="modal-action contents ">
             <form method="dialog" class="contents">
+
                 <div class="contents" hx-trigger="click from:#submit-allowed-users" hx-post="/allowed_users"
                     hx-ext="form-json" hx-swap="none">
-
+                    <div class="contents">
+                        <div class="text-center">Username</div>
+                        <div class="text-center">Voice</div>
+                        <div class="text-center">Always</div>
+                        <div class="text-center">Delete</div>
+                   </div>
                     {% for user, data in allowed_users.items() %}
                     <div class="contents">
                         <input class="name-change text-center" type="text" value="{{user}}" placeholder="Allowed User"
@@ -27,7 +33,7 @@
                             _="on change from next <input/> set me.checked to not it.checked end
                                 on change from previous .name-change set my.name to its.value end
                         "/>
-                        <input type="checkbox" class="toggle toggle-primary" name="{{user}}" value="true"
+                        <input type="checkbox" class="toggle toggle-primary justify-self-center self-center" name="{{user}}" value="true"
                             {% if data[1] is true %} checked {% endif %} 
                             _="on change from previous .name-change set my.name to its.value end
                         " />
