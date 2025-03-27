@@ -14,6 +14,7 @@ SCOPES = [AuthScope.USER_READ_CHAT]
 async def on_message(message: ChannelChatMessageSourceEvent):
     m = Message(message)
     if m.is_valid:
+        m.save_text_to_file()
         m.say_message()
 
 

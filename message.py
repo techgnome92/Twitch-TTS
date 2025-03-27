@@ -3,6 +3,7 @@ from validate import validate_message, Settings
 from filters import filter_message
 from utils import (
     settings,
+    secrets,
     allowed_users,
     ignored_users,
     ignored_words,
@@ -60,3 +61,7 @@ class Message:
         play_obj = wave_obj.play()
         play_obj.wait_done()
         os.remove(temp_file)
+
+    def save_text_to_file(self):
+        with open(secrets["OBS_TEXT_FILE_PATH"], "w") as f:
+            f.write(self.text)
