@@ -11,7 +11,7 @@ import simpleaudio as sa
 templates = Jinja2Templates(directory="templates")
 
 
-TTS_RUNNING: bool = False
+Message.TTS_RUNNING = False
 
 lifespan_events = {}
 
@@ -41,7 +41,7 @@ async def root(request: Request):
             "ignored_words": Message.ignored_words,
             "replace_words": Message.replace_words,
             "regex_filters": Message.regex_filter,
-            "TTS_RUNNING": TTS_RUNNING
+            "TTS_RUNNING": Message.TTS_RUNNING
         },
     )
 
