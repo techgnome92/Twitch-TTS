@@ -45,4 +45,7 @@ def wait_for_user_input():
 
 
 if __name__ == "__main__":
-    asyncio.run(run_twitch())
+    eventsub, twitch = asyncio.run(run_twitch())
+
+    wait_for_user_input()
+    exit_application(eventsub, twitch)
