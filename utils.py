@@ -32,11 +32,11 @@ def save_json(data, fp: str) -> None:
 
 secrets = load_json("settings/config.json")
 settings = Settings(**load_json("settings/settings.json"))
-voices = load_json("voices.json")
+voices = load_json("data/voices.json")
 
-ignored_users = load_json("users/ignored.json")
-allowed_users = load_json("users/allowed.json")
+ignored_users = load_json("data/users/ignored.json")
+allowed_users = load_json("data/users/allowed.json")
 
-ignored_words = load_json("filters_json/word_ignore.json")
-replace_words = load_json("filters_json/word_replace.json")
-regex_filter = load_json("filters_json/regex_filters.json")
+ignored_words = load_json("data/filters_json/word_ignore.json")
+replace_words = load_json("data/filters_json/word_replace.json")
+regex_filter = load_json("data/filters_json/regex_filters.json")
