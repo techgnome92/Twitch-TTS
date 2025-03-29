@@ -40,6 +40,7 @@ async def exit_application(eventsub, twitch):
 
 
 def wait_for_user_input():
+    Message.TTS_RUNNING = True
     print("The bot is running")
     input("press ENTER to close\n")
 
