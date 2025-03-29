@@ -5,6 +5,9 @@ import re
 
 ms_voice_prefix = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens"
 
+path = f"{os.getcwd()}\\dectalk"
+os.add_dll_directory(f"{path}")
+
 
 def generate_wav(filepath, message, rate=120, volume=100, voice="microsoft|sam"):
     v = voice.split("|")
@@ -25,7 +28,9 @@ def microsoft_tts(filepath, message, rate=120, volume=100, voice="MSSam"):
 def dectalk_tts(filepath, message, rate=120, volume=100, voice="Paul"):
     message = message.replace('"', "").replace("&", "").replace("|", "").replace(";", "")
     message = re.sub(r"\[:.+?\]", "", message)
-    os.system(f'say.exe -d dtalk_us.dic -w {filepath} "[:phoneme on] [:name {voice}] [:rate {rate}] {message}"')
+    os.system(
+        f'dectalk\\say.exe -d dtalk_us.dic -w {filepath} "[:phoneme on] [:name {voice}] [:rate {rate}] {message}"'
+    )
 
 
 better_name_needed = {"microsoft": microsoft_tts, "dectalk": dectalk_tts}
