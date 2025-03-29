@@ -30,8 +30,8 @@ def save_json(data, fp: str) -> None:
         json.dump(data, f, indent=4)
 
 
-secrets = load_json("config.json")
-settings = Settings(**load_json("settings.json"))
+secrets = load_json("settings/config.json")
+settings = Settings(**load_json("settings/settings.json"))
 voices = load_json("voices.json")
 
 ignored_users = load_json("users/ignored.json")

@@ -62,7 +62,7 @@ def skip_message():
 def update_validation(_settings: Settings):
     Message.settings = _settings
     Message.settings.TTS_VOICE = _settings.TTS_VOICE.lower()
-    save_json(Message.settings.model_dump(mode="json"), "settings.json")
+    save_json(Message.settings.model_dump(mode="json"), "settings/settings.json")
 
 
 # ALLOWED USERS

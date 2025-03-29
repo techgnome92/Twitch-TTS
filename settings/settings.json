@@ -1,5 +1,5 @@
 {
-    "BROADCASTER_ALLOWED": false,
+    "BROADCASTER_ALLOWED": true,
     "SUBSCRIBERS_ALLOWED": false,
     "VIP_ALLOWED": false,
     "TURBO_ALLOWED": false,
@@ -12,6 +12,6 @@
     "SAY_CHEER_EMOTE": false,
     "SAY_USERNAME": false,
     "READ_SHARED_CHAT": false,
-    "TTS_VOICE": "microsoft|sam",
+    "TTS_VOICE": "dectalk|paul",
     "TTS_RATE": 125
 }
