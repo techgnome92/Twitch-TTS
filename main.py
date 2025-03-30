@@ -7,6 +7,8 @@ from fastapi.templating import Jinja2Templates
 from twitch.twitch import run_twitch
 from message import Message
 import simpleaudio as sa
+import os
+import signal
 
 templates = Jinja2Templates(directory="templates")
 
@@ -16,14 +18,19 @@ Message.TTS_RUNNING = False
 lifespan_events = {}
 
 
+async def shutdown(lifespan_events: dict):
+    await lifespan_events["eventsub"].stop()
+    await lifespan_events["twitch"].close()
+    print("Bot is shutting down")
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     lifespan_events["eventsub"], lifespan_events["twitch"] = await run_twitch()
     print("Bot is starting up")
     yield
-    await lifespan_events["eventsub"].stop()
-    await lifespan_events["twitch"].close()
-    print("Bot is shutting down")
+    await shutdown(lifespan_events)
+
 
 app = FastAPI(lifespan=lifespan)
 
@@ -41,7 +48,7 @@ async def root(request: Request):
             "ignored_words": Message.ignored_words,
             "replace_words": Message.replace_words,
             "regex_filters": Message.regex_filter,
-            "TTS_RUNNING": Message.TTS_RUNNING
+            "TTS_RUNNING": Message.TTS_RUNNING,
         },
     )
 
@@ -56,6 +63,11 @@ def toggle_play(on: dict):
 @app.post("/skip_message")
 def skip_message():
     sa.stop_all()
+
+
+@app.post("/quit")
+async def _quit():
+    os.kill(os.getpid(), signal.CTRL_C_EVENT)
 
 
 @app.post("/update_validation")

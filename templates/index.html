@@ -19,27 +19,32 @@
 
 <body>
     <main>
-        <!-- SETTINGS -->
-        {% include 'settings.html' %}
+        <input id="open" type="checkbox" class="hidden peer">
+        <div class="peer-checked:hidden">
+            <!-- SETTINGS -->
+            {% include 'settings.html' %}
 
-        <!-- ALLOWED USERS -->
-        {% include 'users/allowed_user.html' %}
+            <!-- ALLOWED USERS -->
+            {% include 'users/allowed_user.html' %}
 
-        <!-- IGNORED USERS -->
-        {% include 'users/ignored_user.html' %}
+            <!-- IGNORED USERS -->
+            {% include 'users/ignored_user.html' %}
 
-        <!-- Play TTS -->
-        {% include 'play_settings.html' %}
+            <!-- Play TTS -->
+            {% include 'play_settings.html' %}
 
-        <!-- IGNORE WORDS -->
-        {% include 'filters/ignore_words.html' %}
+            <!-- IGNORE WORDS -->
+            {% include 'filters/ignore_words.html' %}
 
-        <!-- REPLACE WORDS -->
-        {% include 'filters/replace_words.html' %}
+            <!-- REPLACE WORDS -->
+            {% include 'filters/replace_words.html' %}
 
-        <!-- REGEX FILTER -->
-        {% include 'filters/regex_filter.html' %}
-
+            <!-- REGEX FILTER -->
+            {% include 'filters/regex_filter.html' %}
+        </div>
+        <div id="Close" class="hidden peer-checked:block">
+            You can close this tab
+        </div>
     </main>
 
 </body>
