@@ -13,7 +13,7 @@ from utils import (
     save_json
 )
 import os, uuid  # noqa
-from tts import generate_wav
+from tts.tts import generate_wav
 import simpleaudio as sa
 
 
