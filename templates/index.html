@@ -21,6 +21,8 @@
     <main class="flex justify-center h-screen">
         <input id="open" type="checkbox" class="hidden peer">
         <div class="peer-checked:hidden grid grid-cols-1 w-1/2 gap-4 m-auto">
+            <!-- Play TTS -->
+            {% include 'play_settings.html' %}
             <!-- SETTINGS -->
             {% include 'settings.html' %}
 
@@ -30,8 +32,7 @@
             <!-- IGNORED USERS -->
             {% include 'users/ignored_user.html' %}
 
-            <!-- Play TTS -->
-            {% include 'play_settings.html' %}
+
 
             <!-- IGNORE WORDS -->
             {% include 'filters/ignore_words.html' %}
@@ -41,9 +42,11 @@
 
             <!-- REGEX FILTER -->
             {% include 'filters/regex_filter.html' %}
+    <input type="button" class="mt-4 btn btn-primary" hx-ext='json-enc' hx-swap="none" value="Quit" _="on click set #open.checked to true"/>
+
         </div>
-        <div id="Close" class="hidden peer-checked:block">
-            You can close this tab
+        <div id="Close" class="hidden peer-checked:block justify-center m-auto">
+            Close this window
         </div>
     </main>
 

@@ -1,10 +1,23 @@
-<div>
-    <label for="play_tts">Play TTS</label>
-    <input id="play_tts" type="checkbox" {% if TTS_RUNNING %} checked {% endif %} class="toggle toggle-primary"
-        name="on" hx-post="/toggle_play" hx-ext='json-enc' hx-swap="none" />
+<div class="flex justify-around mb-4">
+    <label for="play_tts" class="flex ">
+        <input id="play_tts" type="checkbox" {% if TTS_RUNNING %} checked {% endif %} class="peer hidden" name="on"
+            hx-post="/toggle_play" hx-ext='json-enc' hx-swap="none" />
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+            class="fill-current h-20 peer-checked:hidden">
+            <path fill-rule="evenodd"
+                d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm14.024-.983a1.125 1.125 0 0 1 0 1.966l-5.603 3.113A1.125 1.125 0 0 1 9 15.113V8.887c0-.857.921-1.4 1.671-.983l5.603 3.113Z"
+                clip-rule="evenodd" />
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+            class="h-20 hidden peer-checked:block">
+            <path fill-rule="evenodd"
+                d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm6-2.438c0-.724.588-1.312 1.313-1.312h4.874c.725 0 1.313.588 1.313 1.313v4.874c0 .725-.588 1.313-1.313 1.313H9.564a1.312 1.312 0 0 1-1.313-1.313V9.564Z"
+                clip-rule="evenodd" />
+        </svg>
+
+
+    </label>
+    <input id="skip_tts" type="button" class="btn btn-primary self-center" hx-post="/skip_message" hx-ext='json-enc' hx-swap="none"
+        value="Skip Message" />
+
 </div>
-
-<input id="skip_tts" type="button" class="btn btn-primary" hx-post="/skip_message" hx-ext='json-enc' hx-swap="none" value="Skip Message"/>
-
-
-<input type="button" class="btn btn-primary" hx-ext='json-enc' hx-swap="none" value="Quit" _="on click set #open.checked to true"/>
