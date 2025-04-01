@@ -5,7 +5,6 @@ from .dectalk import dectalk
 
 def generate_wav(filepath, message, rate=120, volume=100, voice="microsoft|sam"):
     v = voice.split("|")
-    print(v[0])
     tts_systems[v[0]](filepath, message, rate, volume, voice_options[voice])
 
 

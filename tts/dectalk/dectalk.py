@@ -8,7 +8,6 @@ os.add_dll_directory(f"{path}")
 
 
 def tts(filepath, message, rate=120, volume=100, voice="Paul"):
-    print("TESTING")
     message = message.replace('"', "").replace("&", "").replace("|", "").replace(";", "")
     message = re.sub(r"\[:.+?\]", "", message)
     os.system(
