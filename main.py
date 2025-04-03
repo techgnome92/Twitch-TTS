@@ -33,6 +33,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan)
+# app = FastAPI()
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -66,7 +67,7 @@ def skip_message():
 
 
 @app.post("/quit")
-async def _quit():
+def quit_program():
     os.kill(os.getpid(), signal.CTRL_C_EVENT)
 
 
