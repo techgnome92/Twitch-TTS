@@ -53,8 +53,8 @@
                         if settings["SAY_USERNAME"] %} checked {% endif %} />
 
                     <label class="text-right" for="toggle_read_shared_chat">Read Shared Chat</label>
-                    <input type="checkbox" id="toggle_read_shared_chat" name="READ_SHARED_CHAT" class="toggle toggle-primary" {%
-                        if settings["READ_SHARED_CHAT"] %} checked {% endif %} />
+                    <input type="checkbox" id="toggle_read_shared_chat" name="READ_SHARED_CHAT"
+                        class="toggle toggle-primary" {% if settings["READ_SHARED_CHAT"] %} checked {% endif %} />
 
                     <label class="text-right" for="bit_amount">Bit Amount</label>
                     <input type="number" id="bit_amount" name="BIT_DONATION_AMOUNT" class="input validator" min="1"
@@ -67,14 +67,24 @@
                     <label class="text-right" for="voices">Default Voice</label>
                     <select class="select capitalize" name="TTS_VOICE">
                         {% for voice in voices.keys() %}
-                            {% set v = voice.split("|") %}
-                            <option {% if settings["TTS_VOICE"]==voice %} selected {% endif %} label="{{v[1]}} ({{v[0]}})" value="{{voice}}"></option>
+                        {% set v = voice.split("|") %}
+                        <option {% if settings["TTS_VOICE"]==voice %} selected {% endif %} label="{{v[1]}} ({{v[0]}})"
+                            value="{{voice}}"></option>
                         {% endfor %}
                     </select>
-                    
+
+                    <div class="flex justify-around col-span-2">
+                        {% for option in ["keepup", "queue", "multi"] %}
+                        <div class="flex w-full justify-center">
+                            <input  type="radio" id="{{option}}" name="MODE" value="{{option}}"
+                            {% if settings["MODE"]==option %} checked {% endif %}>
+                            <label class="px-4" for="{{option}}">{{option}}</label>
+                        </div>
+                        {% endfor %}
+                    </div>
                     <label class="text-right" for="tts_rate">TTS Rate (Words per Minute)</label>
-                    <input type="number" id="tts_rate" name="TTS_RATE" class="input validator" min="1"
-                        pattern="[0-9]" value='{{settings["TTS_RATE"]}}' />
+                    <input type="number" id="tts_rate" name="TTS_RATE" class="input validator" min="1" pattern="[0-9]"
+                        value='{{settings["TTS_RATE"]}}' />
 
                     <input id="submit-validation" class="btn btn-primary col-span-2" type="submit" value="save" />
                 </div>

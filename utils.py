@@ -18,6 +18,7 @@ class Settings(BaseModel):
     READ_SHARED_CHAT: bool = False
     TTS_VOICE: str = "microsoft|sam"
     TTS_RATE: int = 120
+    MODE: str = "queue"
 
 
 def load_json(fp: str):

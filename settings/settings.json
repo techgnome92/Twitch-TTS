@@ -13,5 +13,6 @@
     "SAY_USERNAME": false,
     "READ_SHARED_CHAT": false,
     "TTS_VOICE": "dectalk|paul",
-    "TTS_RATE": 125
+    "TTS_RATE": 125,
+    "MODE": "queue"
 }
