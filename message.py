@@ -26,6 +26,7 @@ class Message:
     ignored_words: list = ignored_words
     replace_words: dict = replace_words
     TTS_RUNNING: bool = False
+    player = None
 
     def __init__(self, data: ChannelChatMessageSourceEvent):
         self.data = data
@@ -37,6 +38,7 @@ class Message:
         self.volume = 100
         self.voice = self.get_voice()
         self.file = f"{str(uuid.uuid1())}.wav"
+        self.play_object = None
 
     def validate(self):
         if self.TTS_RUNNING:
@@ -65,9 +67,23 @@ class Message:
         generate_wav(self.file, self.text, rate=self.rate, voice=self.voice)
 
         wave_obj = sa.WaveObject.from_wave_file(self.file)
-        play_obj = wave_obj.play()
-        play_obj.wait_done()
+        self.play_object = wave_obj.play()
+        Message.player = self.play_object
         os.remove(self.file)
 
     def save_text_to_file(self):
         save_json(self.data.to_dict(include_none_values=True), secrets["LATEST_MESSAGE_JSON"])
+
+    def choose_mode(self):
+        if Message.settings.MODE == "keepup":
+            if not Message.player or not Message.player.is_playing():
+                self.save_text_to_file()
+                self.say_message()
+
+        elif Message.settings.MODE == "multi":
+            self.say_message()
+
+        else:
+            self.save_text_to_file()
+            self.say_message()
+            self.play_object.wait_done()
