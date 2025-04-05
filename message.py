@@ -35,6 +35,8 @@ class Message:
         self.text = self.filter_message()
         self.rate = self.settings.TTS_RATE
         self.volume = 100
+        self.voice = self.get_voice()
+        self.file = f"{str(uuid.uuid1())}.wav"
 
     def validate(self):
         if self.TTS_RUNNING:
@@ -49,22 +51,23 @@ class Message:
             )
         return ""
 
-    def say_message(self):
-        session = str(uuid.uuid1())
-        temp_file = f"{session}.wav"
+    def get_voice(self):
+        _voice = self.settings.TTS_VOICE
 
-        voice = self.settings.TTS_VOICE
         if self.user in self.allowed_users:
             if self.allowed_users[self.user][0] in voice_options:
+                _voice = self.allowed_users[self.user][0]
+        self.voice = _voice
 
-                voice = self.allowed_users[self.user][0]
+    def say_message(self):
 
-        generate_wav(temp_file, self.text, rate=self.rate, voice=voice)
+        self.get_voice()
+        generate_wav(self.file, self.text, rate=self.rate, voice=self.voice)
 
-        wave_obj = sa.WaveObject.from_wave_file(temp_file)
+        wave_obj = sa.WaveObject.from_wave_file(self.file)
         play_obj = wave_obj.play()
         play_obj.wait_done()
-        os.remove(temp_file)
+        os.remove(self.file)
 
     def save_text_to_file(self):
         save_json(self.data.to_dict(include_none_values=True), secrets["LATEST_MESSAGE_JSON"])
