@@ -10,7 +10,7 @@ from utils import (
     replace_words,
     regex_filter,
     voices as voice_options,
-    save_json
+    save_json,
 )
 import os, uuid  # noqa
 from tts.tts import generate_wav
@@ -44,7 +44,9 @@ class Message:
 
     def filter_message(self) -> str:
         if self.is_valid:
-            return filter_message(self.message, self.ignored_words, self.replace_words, self.regex_filter)
+            return filter_message(
+                self.message, self.user, self.ignored_words, self.replace_words, self.regex_filter, Message.settings
+            )
         return ""
 
     def say_message(self):
