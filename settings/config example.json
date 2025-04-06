@@ -5,6 +5,7 @@
     "BROADCASTER_USER_ID": "",
     "CHATTER_USER_ID": "",
     "PORT": "8000",
+    "SILENCE_HOTKEY": "ctrl+shift+a",
 
     "REGEX_FILTER_PATH": "data\\filters\\regex_filters.json",
     "WORD_IGNORE_LIST_PATH": "data\\filters\\word_ignore.json",

@@ -1,5 +1,5 @@
 {
-    "BROADCASTER_ALLOWED": false,
+    "BROADCASTER_ALLOWED": true,
     "SUBSCRIBERS_ALLOWED": false,
     "VIP_ALLOWED": false,
     "TURBO_ALLOWED": false,

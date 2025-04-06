@@ -15,6 +15,10 @@ from utils import (
 import os, uuid  # noqa
 from tts.tts import generate_wav
 import simpleaudio as sa
+import keyboard
+
+if secrets["SILENCE_HOTKEY"]:
+    keyboard.add_hotkey(secrets["SILENCE_HOTKEY"], sa.stop_all)
 
 
 class Message:
