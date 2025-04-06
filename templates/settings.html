@@ -73,6 +73,10 @@
                         {% endfor %}
                     </select>
 
+                    <label class="text-right" for="tts_rate">TTS Rate (Words per Minute)</label>
+                    <input type="number" id="tts_rate" name="TTS_RATE" class="input validator" min="1" pattern="[0-9]"
+                        value='{{settings["TTS_RATE"]}}' />
+
                     <div class="flex justify-around col-span-2">
                         {% for option in ["keepup", "queue", "multi"] %}
                         <div class="flex w-full justify-center">
@@ -82,9 +86,6 @@
                         </div>
                         {% endfor %}
                     </div>
-                    <label class="text-right" for="tts_rate">TTS Rate (Words per Minute)</label>
-                    <input type="number" id="tts_rate" name="TTS_RATE" class="input validator" min="1" pattern="[0-9]"
-                        value='{{settings["TTS_RATE"]}}' />
 
                     <input id="submit-validation" class="btn btn-primary col-span-2" type="submit" value="save" />
                 </div>
