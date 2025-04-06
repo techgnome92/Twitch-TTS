@@ -4,6 +4,7 @@ from validate import Settings
 from utils import save_json, voices
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 from twitch.twitch import run_twitch
 from message import Message
 import simpleaudio as sa
@@ -34,6 +35,13 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 # app = FastAPI()
+
+
+app.mount(
+    "/static",
+    StaticFiles(directory="static"),
+    name="static",
+)
 
 
 @app.get("/", response_class=HTMLResponse)
