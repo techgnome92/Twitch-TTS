@@ -71,19 +71,19 @@ class Message:
         Message.player = self.play_object
         os.remove(self.file)
 
-    def save_text_to_file(self):
-        save_json(self.data.to_dict(include_none_values=True), secrets["LATEST_MESSAGE_JSON"])
+    # def save_text_to_file(self):
+    #     save_json(self.data.to_dict(include_none_values=True), secrets["LATEST_MESSAGE_JSON"])
 
     def choose_mode(self):
         if Message.settings.MODE == "keepup":
             if not Message.player or not Message.player.is_playing():
-                self.save_text_to_file()
+                # self.save_text_to_file()
                 self.say_message()
 
         elif Message.settings.MODE == "multi":
             self.say_message()
 
         else:
-            self.save_text_to_file()
+            # self.save_text_to_file()
             self.say_message()
             self.play_object.wait_done()

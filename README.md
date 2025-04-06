@@ -4,8 +4,8 @@ Twitch text-to-speech bot is a bot that reads out chat messages using DECTalk or
 # Installation
 Install the requirements with `python -m pip install -r requirements.txt`
 
-TO use Windows XP voices run WinXP_TTS_Voices_v1.3.exe in tts/microsoft
-
+To install Windows XP voices (Sam, Mike, Mary) run `WinXP_TTS_Voices_v1.3.exe` in `tts/microsoft`
+* Install at your own risk
 
 # Setup
 ## Register Twitch Application
@@ -19,7 +19,7 @@ OAuth Redirect URLs
 Category - Chat Bot
 
 ## Configure
-Update config.json in settings folder
+Update `config example.json` and rename to `config.json` in settings folder
 
 - APPLICATION_NAME - Name of Application from twitch dev console
 - CLIENT_ID - Client ID from twitch dev console
