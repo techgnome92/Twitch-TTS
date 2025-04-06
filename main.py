@@ -10,6 +10,7 @@ from message import Message
 import simpleaudio as sa
 import os
 import signal
+import webbrowser
 
 templates = Jinja2Templates(directory="templates")
 
@@ -28,6 +29,7 @@ async def shutdown(lifespan_events: dict):
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     lifespan_events["eventsub"], lifespan_events["twitch"] = await run_twitch()
+    webbrowser.open("http://localhost:8000/", new=2)
     print("Bot is starting up")
     yield
     await shutdown(lifespan_events)
