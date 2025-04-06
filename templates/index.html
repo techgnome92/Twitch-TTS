@@ -42,7 +42,7 @@
 
             <!-- REGEX FILTER -->
             {% include 'filters/regex_filter.html' %}
-    <input type="button" class="mt-4 btn btn-primary" hx-ext='json-enc' hx-swap="none" value="Quit" _="on click set #open.checked to true"/>
+            <input type="button" class="mt-4 btn btn-primary" hx-post="/quit" hx-ext='json-enc' hx-swap="none" value="Quit" _="on click set #open.checked to true"/>
 
         </div>
         <div id="Close" class="hidden peer-checked:block justify-center m-auto">
