@@ -80,7 +80,7 @@
                     <div class="flex justify-around col-span-2">
                         {% for option in ["keepup", "queue", "multi"] %}
                         <div class="flex w-full justify-center">
-                            <input  type="radio" id="{{option}}" name="MODE" value="{{option}}"
+                            <input class="radio radio-primary"  type="radio" id="{{option}}" name="MODE" value="{{option}}"
                             {% if settings["MODE"]==option %} checked {% endif %}>
                             <label class="px-4" for="{{option}}">{{option}}</label>
                         </div>
