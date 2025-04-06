@@ -5,9 +5,9 @@
     "BROADCASTER_USER_ID": "",
     "CHATTER_USER_ID": "",
 
-    "REGEX_FILTER_PATH": "data\\filters_json\\regex_filter.json",
-    "WORD_IGNORE_LIST_PATH": "data\\filters_json\\word_ignore.json",
-    "WORD_REPLACE_DICT_PATH": "data\\filters_json\\word_replace.json",
+    "REGEX_FILTER_PATH": "data\\filters\\regex_filter.json",
+    "WORD_IGNORE_LIST_PATH": "data\\filters\\word_ignore.json",
+    "WORD_REPLACE_DICT_PATH": "data\\filters\\word_replace.json",
     "USER_ALLOW_PATH": "data\\users\\allowed_users.json",
     "USER_IGNORE_PATH": "data\\users\\ignored_users.json"
 }

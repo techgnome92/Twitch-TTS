@@ -135,8 +135,8 @@ def add_word_replace_row(request: Request):
 
 @app.post("/regex_filter")
 def update_regex_filter(regex: dict[str, list]):
-    Message.regex_filter = set(regex["regex"])
-    save_json(list(Message.regex_filter), "data/filters/regex_filter.json")
+    Message.regex_filter = set(regex["regex"]) if "regex" in regex else []
+    save_json(list(Message.regex_filter), "data/filters/regex_filters.json")
 
 
 @app.get("/regex_filter_row")
