@@ -1,5 +1,5 @@
 {
-    "BROADCASTER_ALLOWED": true,
+    "BROADCASTER_ALLOWED": false,
     "SUBSCRIBERS_ALLOWED": false,
     "VIP_ALLOWED": false,
     "TURBO_ALLOWED": false,
@@ -9,10 +9,10 @@
     "CHANNEL_POINT_ALLOWED": false,
     "CHANNEL_POINT_ID": "",
     "EVERYONE_ALLOWED": false,
-    "SAY_CHEER_EMOTE": true,
-    "SAY_USERNAME": true,
+    "SAY_CHEER_EMOTE": false,
+    "SAY_USERNAME": false,
     "READ_SHARED_CHAT": false,
-    "TTS_VOICE": "dectalk|paul",
+    "TTS_VOICE": "microsoft|sam",
     "TTS_RATE": 125,
     "MODE": "queue"
 }
