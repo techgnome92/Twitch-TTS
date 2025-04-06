@@ -4,6 +4,7 @@
     "CLIENT_SECRET": "",
     "BROADCASTER_USER_ID": "",
     "CHATTER_USER_ID": "",
+    "PORT": "8000",
 
     "REGEX_FILTER_PATH": "data\\filters\\regex_filters.json",
     "WORD_IGNORE_LIST_PATH": "data\\filters\\word_ignore.json",

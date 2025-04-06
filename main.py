@@ -11,6 +11,7 @@ import simpleaudio as sa
 import os
 import signal
 import webbrowser
+from utils import secrets
 
 templates = Jinja2Templates(directory="templates")
 
@@ -29,7 +30,7 @@ async def shutdown(lifespan_events: dict):
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     lifespan_events["eventsub"], lifespan_events["twitch"] = await run_twitch()
-    webbrowser.open("http://localhost:8000/", new=2)
+    webbrowser.open(f"http://localhost:{secrets['PORT']}/", new=2)
     print("Bot is starting up")
     yield
     await shutdown(lifespan_events)
@@ -149,4 +150,4 @@ def add_regex_filter_row(request: Request):
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run("main:app", host="0.0.0.0", port=8000)
+    uvicorn.run("main:app", host="0.0.0.0", port=secrets["PORT"])
