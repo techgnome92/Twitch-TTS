@@ -35,5 +35,3 @@ Get your Channel ID from https://www.streamweasels.com/tools/convert-twitch-user
 
 # Run
 Use `python main.py` for access to the full GUI interface at localhost:8000
-
-Use `python twitch/twitch.py` to run a GUIless version. Note: This does not allow updating any settings, user lists, or filters  while running
