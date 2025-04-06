@@ -29,6 +29,10 @@ def validate_message(
         if "broadcaster" in badges:
             return True
 
+    if settings.SUBSCRIBERS_ALLOWED:
+        if "subscriber" in badges:
+            return True
+
     if settings.VIP_ALLOWED:
         if "vip" in badges:
             return True
